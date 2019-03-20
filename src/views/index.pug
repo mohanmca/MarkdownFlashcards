@@ -1,0 +1,11 @@
+html
+    head
+        title MyApp
+    body(class=["MyClass"])
+        h1(id='MyId')=title
+        p
+            h3 sub header
+            h4 delivered by pug engine
+        ul
+            each val in list
+                li=val

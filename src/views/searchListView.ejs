@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://www.nerdishchaterwa.com/render/pVkM36Biz1 -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <title>
+        <%= title%> Search
+    </title>
+    <meta name="generator" content="nerdishchaterwa">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Bootstrap Clean Bootstrap 3 single column layout that works well for blog or article lists. This template features circle images, minimal narrow-style">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    <link href="/css/style.css" type="text/css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+
+    <!-- CSS code from nerdishchaterwa.com editor -->
+
+    <style type="text/css">
+        /* override bootstrap styles */
+        @import url('http://fonts.googleapis.com/css?family=Oswald:300,400:latin,latin-ext');
+    </style>
+</head>
+
+<!-- HTML code from nerdishchaterwa.com editor -->
+
+<body>
+
+    <header class="navbar navbar-bright navbar-fixed-top" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="https://www.nerdishchaterwa.com/" class="navbar-brand">Home</a>
+                <% for(let i=0; i<nav.length; i++) { %>
+                <a href="<%= nav[i].link%>" class="navbar-brand">
+                    <%= nav[i].title%></a>
+                <%}%>
+                </ul>
+            </div>
+            <nav class="collapse navbar-collapse" role="navigation">
+            </nav>
+        </div>
+    </header>
+
+    <div id="masthead">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <h1>
+                        <%= title%>
+                        <p class="lead"></p>
+                    </h1>
+                </div>
+                <div class="col-md-5">
+                </div>
+            </div>
+        </div><!-- /cont -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="top-spacer"> </div>
+                </div>
+            </div>
+        </div><!-- /cont -->
+
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="panel">
+                    <div class="panel-body">
+
+
+
+                        <!--/stories-->
+
+                        <% for(let i=0; i<searchResults.length; i++) { %>
+                        <div class="row">
+                            <br>
+                            <div class="col-md-2 col-sm-3 text-center">
+                                <a class="story-title" href="https://www.nerdishchaterwa.com/render/pVkM36Biz1#"><img alt=""
+                                        src="/img/img_ico.jpg" style="width:100px;height:100px" class="img-circle"></a>
+                            </div>
+                            <div class="col-md-10 col-sm-9">
+                                <h3>
+                                    <%=searchResults[i].text%>
+                                </h3>
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <h4><span class="label label-default">
+                                                <%=searchResults[i].result%></span></h4>
+                                        <h4>
+                                            <small style="font-family:courier,&#39;new courier&#39;;" class="text-muted">2
+                                                hours ago •
+
+                                                <a href="/books/<%=searchResults[i]._id%>" class="text-muted">Read More</a></small>
+                                        </h4>
+                                    </div>
+                                    <div class="col-xs-3"></div>
+                                </div>
+                                <br><br>
+                            </div>
+                        </div>
+                        <%}%>
+                        <a href="https://www.nerdishchaterwa.com/" class="btn btn-primary pull-right btnNext">More
+                            <i class="glyphicon glyphicon-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!--/col-12-->
+        </div>
+    </div>
+
+
+    <hr>
+
+    <div class="container" id="footer">
+        <div class="row">
+            <div class="col col-sm-12">
+
+                <h1>Follow Us</h1>
+                <div class="btn-group">
+                    <a class="btn btn-twitter btn-lg" href="https://www.nerdishchaterwa.com/render/pVkM36Biz1#"><i class="icon-twitter icon-large"></i>
+                        Twitter</a>
+                    <a class="btn btn-facebook btn-lg" href="https://www.nerdishchaterwa.com/render/pVkM36Biz1#"><i class="icon-facebook icon-large"></i>
+                        Facebook</a>
+                    <a class="btn btn-google-plus btn-lg" href="https://www.nerdishchaterwa.com/render/pVkM36Biz1#"><i class="icon-google-plus icon-large"></i>
+                        Google+</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <hr>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <ul class="list-inline">
+                        <li><i class="icon-facebook icon-2x"></i></li>
+                        <li><i class="icon-twitter icon-2x"></i></li>
+                        <li><i class="icon-google-plus icon-2x"></i></li>
+                        <li><i class="icon-pinterest icon-2x"></i></li>
+                    </ul>
+
+                </div>
+                <div class="col-sm-6">
+                    <p class="pull-right">Built with <i class="icon-heart-empty"></i> at <a href="http://www.nerdishchaterwa.com/">nerdishchaterwa</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript jQuery code from nerdishchaterwa.com editor  -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+        });
+    </script>
+
+
+
+</body>
+
+</html>

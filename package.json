@@ -1,0 +1,48 @@
+{
+  "name": "markdownsrs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "set DEBUG=app,app:* & nodemon app.js",
+    "lint": "node_modules\\.bin\\eslint app.js",
+    "lint-fix": "node_modules\\.bin\\eslint app.js --fix",
+    "mdstart": "nodemon src\\services\\mdQuestionService.js"
+  },
+  "author": "mohanmca@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "0.18.0",
+    "body-parser": "1.18.3",
+    "bootstrap": "4.2.1",
+    "chalk": "2.4.1",
+    "cookie-parser": "1.4.3",
+    "debug": "4.1.1",
+    "ejs": "2.6.1",
+    "express": "4.16.4",
+    "express-session": "1.15.6",
+    "font-awesome": "4.7.0",
+    "lodash": "4.17.11",
+    "markdown-it": "8.4.2",
+    "morgan": "1.9.1",
+    "nodemon": "1.18.9",
+    "xml2js": "0.4.19"
+  },
+  "devDependencies": {
+    "eslint": "5.11.1",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.14.0"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      "node_modules/**/node_modules"
+    ],
+    "delay": "2500",
+    "env": {
+      "NODE_ENV": "development",
+      "PORT": 4000
+    }
+  }
+}
