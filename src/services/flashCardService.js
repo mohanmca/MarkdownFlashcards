@@ -4,8 +4,9 @@ const qs = require("./mdQuestionService");
 const MarkdownIt = require("markdown-it");
 const md = new MarkdownIt();
 
-const mdFile =
-  "D:/git/MohanLearningGround/src/main/md/FlashCards/Java9_to_11FlashCards.md";
+console.log("Current directory " + process.cwd())
+
+const mdFile = process.cwd() + "/Java9_to_11FlashCards.md";
 const mdContent = fs.readFileSync(mdFile).toString();
 const ast = md.parse(mdContent);
 var zip = require("lodash/fp/zip");
