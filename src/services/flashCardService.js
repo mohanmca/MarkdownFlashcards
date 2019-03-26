@@ -6,7 +6,8 @@ const md = new MarkdownIt();
 
 console.log("Current directory " + process.cwd())
 
-const mdFile = process.cwd() + "/Java9_to_11FlashCards.md";
+//const mdFile = process.cwd() + "/Java9_to_11FlashCards.md";
+const mdFile = process.cwd() + "/Body_Language.md";
 const mdContent = fs.readFileSync(mdFile).toString();
 const ast = md.parse(mdContent);
 var zip = require("lodash/fp/zip");
