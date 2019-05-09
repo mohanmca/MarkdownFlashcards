@@ -9,7 +9,7 @@ console.log("Current directory " + process.cwd())
 //const mdFile = process.cwd() + "/Java9_to_11FlashCards.md";
 const mdFile = process.cwd() + "/Body_Language.md";
 const mdContent = fs.readFileSync(mdFile).toString();
-const ast = md.parse(mdContent);
+const ast = md.parse(mdContent, {});
 var zip = require("lodash/fp/zip");
 
 //log(zip([1,2,3],[3,2,1]))
@@ -91,6 +91,15 @@ function flashCardService() {
   return { getQuestionAt, getAnswerAt, getQuestionLength };
 }
 
+if(typeof require != undefined && require.main==module) {
+  console.log("Current working directory " + process.cwd());
+  let testEntity = flashCardService();
+  console.log("Number of questions! : " + testEntity.getQuestionLength());
+  Array.from(Array(testEntity.getQuestionLength()).keys()).map(i => {
+    console.log(i + "\t\t" + testEntity.getQuestionAt(i) + "\n");
+    console.log(i + "Answer :=> " + testEntity.getAnswerAt(i) + "\n");
+  })
+}
 
 
 module.exports = flashCardService();
