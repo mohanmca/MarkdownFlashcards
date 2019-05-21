@@ -16,14 +16,9 @@ function flashCardControllers(flashCardService, nav) {
     const question = flashCardService.getQuestionAt(qIndex);
     const answer = flashCardService.getAnswerAt(qIndex);
     let attemptedQuestions = [];
-    if (Array.isArray(priorQuestions)) {
-      attemptedQuestions = priorQuestions;
-    } else {
-      attemptedQuestions.push(priorQuestions);
-    }
-    attemptedQuestions.push(qIndex);
+    const previousQuestions = !!priorQuestions ?  priorQuestions + "," + qIndex : qIndex+"";
 
-    const flashCard = { question, answer, attemptedQuestions };
+    const flashCard = { question, answer, previousQuestions, qIndex, size: flashCardService.getQuestionLength() };
     return flashCard;
   }
 
@@ -38,10 +33,9 @@ function flashCardControllers(flashCardService, nav) {
   }
 
   function submitFeedback(req, res) {
-    const { attemptedQuestions } = req.query;
-    console.log("Prior attemptedQuestions question! " + attemptedQuestions);
-    const flashCard = getFlashCard(attemptedQuestions);
-    debug("flashCard!" + JSON.stringify(flashCard, null, 2));
+    const { previousQuestions } = req.query;
+    const flashCard = getFlashCard(previousQuestions);
+    // debug("flashCard!" + JSON.stringify(flashCard, null, 2));
     res.render("showCard", {
       nav,
       flashCard,
@@ -49,14 +43,6 @@ function flashCardControllers(flashCardService, nav) {
     });
   }
 
-  function middleware(req, res, next) {
-    if (req.user) {
-      next();
-    } else {
-      res.redirect("/");
-    }
-  }
-
-  return { middleware, getQuestion, submitFeedback };
+  return { getQuestion, submitFeedback };
 }
 module.exports = flashCardControllers;

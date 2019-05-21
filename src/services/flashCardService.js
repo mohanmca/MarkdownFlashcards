@@ -12,19 +12,6 @@ const mdContent = fs.readFileSync(mdFile).toString();
 const ast = md.parse(mdContent, {});
 var zip = require("lodash/fp/zip");
 
-//log(zip([1,2,3],[3,2,1]))
-
-//log(ast)
-//log(mdContent);
-//log(qs.parseQuestions(mdContent));
-//log(qs.parseQuestionAt(1));
-//log();
-//let questionIndices = qs.parseQuestionIndices(ast);
-//log(questionIndices);
-//let question = qs.parseQuestionAt(questions[questions.length-1], ast);
-//log(question);
-//let answerEndIdices = qs.parseAnswerEndIndices(ast);
-//log(answerEndIdices)
 
 let rendererOption2 = {
   html: true,
@@ -79,8 +66,6 @@ function flashCardService() {
   function getAnswerAt(i) {
     let answerContent = qs.getAnswerContentAt(i, ast);
 
-    console.log("Answer content " + JSON.stringify(answerContent));
-
     let answer = md.renderer.render(answerContent, rendererOption);
     // answer = removePre(answer)    
 
@@ -103,6 +88,20 @@ if(typeof require != undefined && require.main==module) {
 
 
 module.exports = flashCardService();
+
+//log(zip([1,2,3],[3,2,1]))
+
+//log(ast)
+//log(mdContent);
+//log(qs.parseQuestions(mdContent));
+//log(qs.parseQuestionAt(1));
+//log();
+//let questionIndices = qs.parseQuestionIndices(ast);
+//log(questionIndices);
+//let question = qs.parseQuestionAt(questions[questions.length-1], ast);
+//log(question);
+//let answerEndIdices = qs.parseAnswerEndIndices(ast);
+//log(answerEndIdices)
 
 //log(zip(questionIndices,answerEndIdices))
 

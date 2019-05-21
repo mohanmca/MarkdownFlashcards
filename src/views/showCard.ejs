@@ -103,21 +103,18 @@
                             <div class="col-md-10 col-sm-9">
                                 <div class="row">
                                     <div class="col-xs-9">
-                                        <h2><span class="label label-default">
-                                                <%- flashCard.question%>?
+                                        <h4><span class="label label-default">
+                                            <%- flashCard.qIndex%> / <%- flashCard.size%>
+                                            <%- flashCard.question%>?
                                                 <br/><br/><br/>
                                             </span>
-                                        </h2>
+                                        </h4>
                                     </div>
                                     <div class="col-xs-3"></div>
                                 </div>
                                 <div class="row" id="showbutton">
                                     <input type="button" onclick="showAnswer();"  value="Show Answer" />
-                                    <form method="GET" id="nextQuestion" name="nextQuestion" action="/flash/submitFeedback">
-                                        <input type="hidden" id="attemptedQuestions" name="attemptedQuestions" value=<%= flashCard.attemptedQuestions %> />
-                                        <input type="submit" value="Next Question" />
-                                    </form>
-                            </div>
+                                </div>
                                 <div class="row hidden" id="answer">
                                     <div class="col-xs-9">
                                         <h4><span class="label-default">
@@ -127,7 +124,14 @@
                                 </div>
                                 <br/>
                                 <br/>
+                                <div class="row" id="showbutton">
+                                    <form method="GET" id="nextQuestion" name="nextQuestion" action="/flash/submitFeedback">
+                                        <input type="hidden" id="previousQuestions" name="previousQuestions" value=<%= flashCard.previousQuestions %> />
+                                        <input type="submit" value="Next Question" />
+                                        <h4>Prior questions - <b><%- flashCard.previousQuestion ? flashCard.previousQuestion.split(",").length : "" %></b><%- flashCard.previousQuestions %></h4>
+                                    </form>
                                 </div>
+                            </div>
                         </div>
                         <a href="https://www.nerdishchaterwa.com/" class="btn btn-primary pull-right btnNext">More
                             <i class="glyphicon glyphicon-chevron-right"></i></a>
@@ -189,7 +193,6 @@
             var ele = document.getElementById("answer");
             ele.classList.remove("hidden");
             ele.style.display = "block";
-            //text.innerHTML = "hide";
 	    }
         function submitFeedback(){            
             document.getElementById("nextQuestion").submit();

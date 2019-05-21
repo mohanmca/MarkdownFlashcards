@@ -23,10 +23,7 @@ function searchControllers(searchervice, nav) {
     });
   }
 
-  function middleware(req, res, next) {
-    res.redirect("/");
-  }
 
-  return { getIndex, middleware };
+  return { getIndex };
 }
 module.exports = searchControllers;

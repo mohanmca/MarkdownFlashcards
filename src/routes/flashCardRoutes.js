@@ -6,12 +6,11 @@ const flashCardController = require("../controllers/flashCardController.js");
 
 function router(nav) {
   const flashCardRouter = express.Router();
-  const { submitFeedback, middleware } = flashCardController(
+  const { submitFeedback } = flashCardController(
     flashCardService,
     nav
   );
 
-  flashCardRouter.use(middleware);
   flashCardRouter.route("/").get(submitFeedback);
   flashCardRouter.route("/submitFeedback").all(submitFeedback);
 
