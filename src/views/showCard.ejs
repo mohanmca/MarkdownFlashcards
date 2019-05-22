@@ -128,7 +128,7 @@
                                     <form method="GET" id="nextQuestion" name="nextQuestion" action="/flash/submitFeedback">
                                         <input type="hidden" id="previousQuestions" name="previousQuestions" value=<%= flashCard.previousQuestions %> />
                                         <input type="submit" value="Next Question" />
-                                        <h4>Prior questions - <b><%- flashCard.previousQuestion ? flashCard.previousQuestion.split(",").length : "" %></b><%- flashCard.previousQuestions %></h4>
+                                        <h4>Prior questions - <b><%- flashCard.previousQuestions ? flashCard.previousQuestions.split(",").length : "" %></b><%- flashCard.previousQuestions %></h4>
                                     </form>
                                 </div>
                             </div>

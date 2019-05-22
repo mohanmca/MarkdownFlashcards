@@ -2,6 +2,16 @@ const debug = require("debug")("app:flashCardControllers");
 //const { MongoClient, ObjectId } = require('mongodb');
 
 function flashCardControllers(flashCardService, nav) {
+
+  function getRandomExcluding(max, exclude) {
+    let qIndex = Math.floor(Math.random() * max);
+
+    if (exclude.indexOf(qIndex) == -1) {
+      return qIndex;
+    }
+    return getRandomExcluding(max, exclude);
+  }
+
   function getFlashCard(priorQuestions) {
     console.log(
       " priorQuestions " +
@@ -9,9 +19,10 @@ function flashCardControllers(flashCardService, nav) {
         " length " +
         flashCardService.getQuestionLength()
     );
-    let qIndex = Math.floor(
-      Math.random() * flashCardService.getQuestionLength()
-    );
+    let exclude = !!priorQuestions ? priorQuestions.split(",").map(i => parseInt(i)) : [];
+
+    let qIndex = getRandomExcluding(flashCardService.getQuestionLength(), exclude);
+
     console.log(" qIndex " + qIndex);
     const question = flashCardService.getQuestionAt(qIndex);
     const answer = flashCardService.getAnswerAt(qIndex);
