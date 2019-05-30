@@ -2,7 +2,6 @@ const debug = require("debug")("app:flashCardControllers");
 //const { MongoClient, ObjectId } = require('mongodb');
 
 function flashCardControllers(flashCardService, nav) {
-
   function getRandomExcluding(max, exclude) {
     let qIndex = Math.floor(Math.random() * max);
 
@@ -12,29 +11,44 @@ function flashCardControllers(flashCardService, nav) {
     return getRandomExcluding(max, exclude);
   }
 
-  function getFlashCard(priorQuestions) {
+  function getFlashCard(markdown, priorQuestions) {
     console.log(
       " priorQuestions " +
         priorQuestions +
         " length " +
-        flashCardService.getQuestionLength()
+        flashCardService.getQuestionLength(markdown)
     );
-    let exclude = !!priorQuestions ? priorQuestions.split(",").map(i => parseInt(i)) : [];
+    let exclude = !!priorQuestions
+      ? priorQuestions.split(",").map(i => parseInt(i))
+      : [];
 
-    let qIndex = getRandomExcluding(flashCardService.getQuestionLength(), exclude);
+    let qIndex = getRandomExcluding(
+      flashCardService.getQuestionLength(markdown),
+      exclude
+    );
 
     console.log(" qIndex " + qIndex);
-    const question = flashCardService.getQuestionAt(qIndex);
-    const answer = flashCardService.getAnswerAt(qIndex);
+    const question = flashCardService.getQuestionAt(markdown, qIndex);
+    const answer = flashCardService.getAnswerAt(markdown, qIndex);
     let attemptedQuestions = [];
-    const previousQuestions = !!priorQuestions ?  priorQuestions + "," + qIndex : qIndex+"";
+    const previousQuestions = !!priorQuestions
+      ? priorQuestions + "," + qIndex
+      : qIndex + "";
 
-    const flashCard = { question, answer, previousQuestions, qIndex, size: flashCardService.getQuestionLength() };
+    const flashCard = {
+      question,
+      answer,
+      previousQuestions,
+      qIndex,
+      size: flashCardService.getQuestionLength(markdown)
+    };
     return flashCard;
   }
 
   function getQuestion(req, res) {
-    let flashCard = getFlashCard();
+    let {markDown} = {...req.params}
+    console.log('getQuestion ********************** Params ' + JSON.stringify(req.params, 2, null));
+    let flashCard = getFlashCard(markDown);
     debug("flashCard!" + JSON.stringify(flashCard, null, 2));
     res.render("showCard", {
       nav,
@@ -44,8 +58,10 @@ function flashCardControllers(flashCardService, nav) {
   }
 
   function submitFeedback(req, res) {
+    let {markDown} = {...req.params}
+    console.log('submitFeedback ********************** Params ' + JSON.stringify(req.params, 2, null));
     const { previousQuestions } = req.query;
-    const flashCard = getFlashCard(previousQuestions);
+    const flashCard = getFlashCard(markDown, previousQuestions);
     // debug("flashCard!" + JSON.stringify(flashCard, null, 2));
     res.render("showCard", {
       nav,

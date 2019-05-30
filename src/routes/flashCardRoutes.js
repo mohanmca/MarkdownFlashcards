@@ -11,8 +11,8 @@ function router(nav) {
     nav
   );
 
-  flashCardRouter.route("/").get(submitFeedback);
-  flashCardRouter.route("/submitFeedback").all(submitFeedback);
+  flashCardRouter.route("/:markDown/").get(submitFeedback);
+  flashCardRouter.route("/:markDown/submitFeedback").all(submitFeedback);
 
   return flashCardRouter;
 }

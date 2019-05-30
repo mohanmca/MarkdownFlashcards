@@ -125,7 +125,7 @@
                                 <br/>
                                 <br/>
                                 <div class="row" id="showbutton">
-                                    <form method="GET" id="nextQuestion" name="nextQuestion" action="/flash/submitFeedback">
+                                    <form method="GET" id="nextQuestion" name="nextQuestion" action="submitFeedback">
                                         <input type="hidden" id="previousQuestions" name="previousQuestions" value=<%= flashCard.previousQuestions %> />
                                         <input type="submit" value="Next Question" />
                                         <h4>Prior questions - <b><%- flashCard.previousQuestions ? flashCard.previousQuestions.split(",").length : "" %></b><%- flashCard.previousQuestions %></h4>

@@ -4,14 +4,16 @@ const qs = require("./mdQuestionService");
 const MarkdownIt = require("markdown-it");
 const md = new MarkdownIt();
 
-console.log("Current directory " + process.cwd())
+console.log("Current directory " + process.cwd());
 
 //const mdFile = process.cwd() + "/Java9_to_11FlashCards.md";
-const mdFile = process.cwd() + "/Body_Language.md";
-const mdContent = fs.readFileSync(mdFile).toString();
-const ast = md.parse(mdContent, {});
 var zip = require("lodash/fp/zip");
 
+function getAst(markdown) {
+  const mdFile = process.cwd() + `/${markdown}.md`;
+  const mdContent = fs.readFileSync(mdFile).toString();
+  return md.parse(mdContent, {});
+}
 
 let rendererOption2 = {
   html: true,
@@ -25,7 +27,6 @@ let rendererOption2 = {
     return "";
   }
 };
-
 
 let rendererOption = {
   html: true,
@@ -41,33 +42,30 @@ let rendererOption = {
 };
 
 function removePre(content) {
-  content = content.replace('<pre>', '');
-  content = content.replace('</pre>', '');
-  return content
+  content = content.replace("<pre>", "");
+  content = content.replace("</pre>", "");
+  return content;
 }
 
-let answer = md.renderer.render(qs.getAnswerContentAt(1, ast), rendererOption)
+//let answer = md.renderer.render(qs.getAnswerContentAt(1, ast), rendererOption);
 //console.log("PreRemoved  "  + removePre(answer));
 
 function flashCardService() {
-
-
-
-  function getQuestionLength() {
-    return qs.parseQuestionIndices(ast).length;
+  function getQuestionLength(markdown) {
+    return qs.parseQuestionIndices(getAst(markdown)).length;
   }
 
-  function getQuestionAt(i) {
-    let question = qs.parseQuestionAt(i, ast);
+  function getQuestionAt(markdown, i) {
+    let question = qs.parseQuestionAt(i, getAst(markdown));
     console.log(JSON.stringify(question, null, 2));
     return question;
   }
 
-  function getAnswerAt(i) {
-    let answerContent = qs.getAnswerContentAt(i, ast);
+  function getAnswerAt(markdown, i) {
+    let answerContent = qs.getAnswerContentAt(i, getAst(markdown));
 
     let answer = md.renderer.render(answerContent, rendererOption);
-    // answer = removePre(answer)    
+    // answer = removePre(answer)
 
     // console.log(answer);
     return answer;
@@ -76,16 +74,15 @@ function flashCardService() {
   return { getQuestionAt, getAnswerAt, getQuestionLength };
 }
 
-if(typeof require != undefined && require.main==module) {
+if (typeof require != undefined && require.main == module) {
   console.log("Current working directory " + process.cwd());
   let testEntity = flashCardService();
-  console.log("Number of questions! : " + testEntity.getQuestionLength());
-  Array.from(Array(testEntity.getQuestionLength()).keys()).map(i => {
-    console.log(i + "\t\t" + testEntity.getQuestionAt(i) + "\n");
-    console.log(i + "Answer :=> " + testEntity.getAnswerAt(i) + "\n");
-  })
+  console.log("Number of questions! : " + testEntity.getQuestionLength('Body_Language'));
+  Array.from(Array(testEntity.getQuestionLength('Body_Language')).keys()).map(i => {
+    console.log(i + "\t\t" + testEntity.getQuestionAt('Body_Language', i) + "\n");
+    console.log(i + "Answer :=> " + testEntity.getAnswerAt('Body_Language', i) + "\n");
+  });
 }
-
 
 module.exports = flashCardService();
 
