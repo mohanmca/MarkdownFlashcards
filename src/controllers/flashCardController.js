@@ -58,6 +58,9 @@ function flashCardControllers(flashCardService, nav) {
 
     function submitFeedback(req, res) {
         let { markDown } = {...req.params }
+        if(!markDown) {
+            res.redirect('/flash/homepage');
+        }
         console.log('submitFeedback ********************** Params ' + JSON.stringify(req.params, 2, null));
         const { previousQuestions } = req.query;
         const flashCard = getFlashCard(markDown, previousQuestions);
