@@ -2,13 +2,13 @@
 ```java
 a
 ```
-----
+<!-- ---- -->
 
-## b
-```java
-b
-```
-----
+<!-- ## b
+```java -->
+<!-- b
+``` -->
+<!-- ---- -->
 ## c
 ```java
 // Additional package java.net.http

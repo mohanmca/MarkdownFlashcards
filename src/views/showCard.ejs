@@ -7,7 +7,7 @@
 
 
     <title>
-        <%= title %>
+        <% title %>
     </title>
     <meta name="generator" content="nerdishchaterwa">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -17,7 +17,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.5/es5-shim.min.js"></script><script src="https://cdn.jsdelivr.net/lodash/2.4.1/lodash.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.5/es5-shim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/lodash/2.4.1/lodash.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.2.0/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/9.1.0/styles/github.min.css">
     <script src="js/markdown-it.js"></script>
@@ -37,6 +38,7 @@
 
     <style type="text/css">
         /* override bootstrap styles */
+        
         @import url('http://fonts.googleapis.com/css?family=Oswald:300,400:latin,latin-ext');
     </style>
 </head>
@@ -54,12 +56,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="https://www.nerdishchaterwa.com/" class="navbar-brand">Home</a>
-                <% for(let i=0; i<nav.length; i++) { %>
-                <a href="<%= nav[i].link%>" class="navbar-brand">
-                    <%= nav[i].title%></a>
-                <%}%>
-                </ul>
+                <a href="" class="navbar-brand">Home</a>
+                <% for(let i=0; i<nav.length; i++)%>
+                    <%{%>
+                        <a href="<%= nav[i].link%>" class="navbar-brand">
+                            <%= nav[i].title%>
+                        </a>
+                        <%}%>
+                            </ul>
             </div>
             <nav class="collapse navbar-collapse" role="navigation">
             </nav>
@@ -71,19 +75,21 @@
             <div class="row">
                 <div class="col-md-7">
                     <h1>
-                        <%= flashCard.quesion %>
-                        <p class="lead"></p>
+                        <%- flashCard.quesion %>
+                            <p class="lead"></p>
                     </h1>
                 </div>
                 <div class="col-md-5">
                 </div>
             </div>
-        </div><!-- /cont -->
+        </div>
+        <!-- /cont -->
 
         <div class="container">
             <div class="row">
             </div>
-        </div><!-- /cont -->
+        </div>
+        <!-- /cont -->
 
     </div>
     <div class="container">
@@ -113,7 +119,7 @@
                                     <div class="col-xs-3"></div>
                                 </div>
                                 <div class="row" id="showbutton">
-                                    <input type="button" onclick="showAnswer();"  value="Show Answer" />
+                                    <input type="button" onclick="showAnswer();" value="Show Answer" />
                                 </div>
                                 <div class="row hidden" id="answer">
                                     <div class="col-xs-9">
@@ -126,9 +132,11 @@
                                 <br/>
                                 <div class="row" id="showbutton">
                                     <form method="GET" id="nextQuestion" name="nextQuestion" action="submitFeedback">
-                                        <input type="hidden" id="previousQuestions" name="previousQuestions" value=<%= flashCard.previousQuestions %> />
+                                        <input type="hidden" id="previousQuestions" name="previousQuestions" value=<%=f lashCard.previousQuestions %> />
                                         <input type="submit" value="Next Question" />
-                                        <h4>Prior questions - <b><%- flashCard.previousQuestions ? flashCard.previousQuestions.split(",").length : "" %></b><%- flashCard.previousQuestions %></h4>
+                                        <h4>Prior questions - <b><%- flashCard.previousQuestions ? flashCard.previousQuestions.split(",").length : "" %></b>
+                                            <%- flashCard.previousQuestions %>
+                                        </h4>
                                     </form>
                                 </div>
                             </div>
@@ -189,17 +197,18 @@
     <!-- JavaScript jQuery code from nerdishchaterwa.com editor  -->
 
     <script type="text/javascript">
-        function showAnswer(){            
+        function showAnswer() {
             var ele = document.getElementById("answer");
             ele.classList.remove("hidden");
             ele.style.display = "block";
-	    }
-        function submitFeedback(){            
+        }
+
+        function submitFeedback() {
             document.getElementById("nextQuestion").submit();
-	    }
-</script>
- 
-        }        
+        }
+    </script>
+
+    }
     </script>
 
 

@@ -57,7 +57,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="http://localhost:4000/flash/homepage" class="navbar-brand">Home</a>
+                <a href="http://localhost:4000/flash/homepage/" class="navbar-brand">Home</a>
+                <% for(let i=0; i<nav.length; i++) { %>
+                    <a href="<%= nav[i].link%>" class="navbar-brand">
+                        <%= nav[i].title%>
+                    </a>
+                    <%}%>
+                        </ul>
             </div>
             <nav class="collapse navbar-collapse" role="navigation">
             </nav>
@@ -68,7 +74,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-7">
-
+                    <h1>
+                        <%= flashCard.quesion %>
+                            <p class="lead"></p>
+                    </h1>
                 </div>
                 <div class="col-md-5">
                 </div>
@@ -97,49 +106,47 @@
                                 <a class="story-title" href="https://www.nerdishchaterwa.com/render/pVkM36Biz1#">
                                     <img alt="" src="" style="width:100px;height:100px" class="img-circle"></a>
                             </div>
-                            <div class="col-md-10">
-                                <!-- <form action="/flash/submitFeedback"> -->
-                                <select name="files" id="opt">
-                                         
-                                        </select> &nbsp;
-                                <!-- <input type="submit"> -->
-                                <!-- <input type="submit" value="submit"> -->
-                                <button id="submit" onclick="myFunction()">submit</button>
-                                <!-- </form> -->
-                            </div>
                             <div class="col-md-10 col-sm-9">
                                 <div class="row">
                                     <div class="col-xs-9">
 
-                                        <!-- <h4><span class="label label-default">
-                                            <br/><br/><br/>
+                                        <h4><span class="label label-default">
+                                            <%- flashCard.qIndex%> / <%- flashCard.size%>
+                                            <%- flashCard.question%>?
+                                                <br/><br/><br/>
                                             </span>
-                                        </h4> -->
+                                        </h4>
                                     </div>
                                     <div class="col-xs-3">
 
                                     </div>
                                 </div>
                                 <div class="row" id="showbutton">
-                                    <!-- <input type="button" onclick="showAnswer();" value="Show Answer" /> -->
+                                    <input type="button" onclick="showAnswer();" value="Show Answer" />
                                 </div>
                                 <div class="row hidden" id="answer">
                                     <div class="col-xs-9">
                                         <h4><span class="label-default">
-                                        </span></h4>
+                                                <%- flashCard.answer%></span></h4>
                                     </div>
                                     <div class="col-xs-3"></div>
                                 </div>
                                 <br/>
                                 <br/>
                                 <div class="row" id="showbutton">
-
+                                    <form method="GET" id="nextQuestion" name="nextQuestion" action="submitFeedback">
+                                        <input type="hidden" id="previousQuestions" name="previousQuestions" value=<%=flashCard.previousQuestions %> />
+                                        <input type="submit" value="Next Question" />
+                                        <h4>Prior questions - <b><%- flashCard.previousQuestions ? flashCard.previousQuestions.split(",").length : "" %></b>
+                                            <%- flashCard.previousQuestions %>
+                                        </h4>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        <!-- <a href="https://www.nerdishchaterwa.com/" class="btn btn-primary pull-right btnNext">easy</a> -->
+                        <a href="javascript:easy()" class="btn btn-primary pull-right btnNext">easy</a>
                         <!-- <i class="glyphicon glyphicon-chevron-right"></i> -->
-                        <!-- <a href="https://www.nerdishchaterwa.com/" class="btn btn-primary pull-right btnNext" style='margin-right:5px'>defficult</a> -->
+                        <a href="https://www.nerdishchaterwa.com/" class="btn btn-primary pull-right btnNext" style='margin-right:5px'>defficult</a>
                         <!-- <i class="glyphicon glyphicon-chevron-right"></i> -->
                     </div>
                 </div>
@@ -195,35 +202,26 @@
     <!-- JavaScript jQuery code from nerdishchaterwa.com editor  -->
 
     <script type="text/javascript">
+        var question = "<%- flashCard.quesion%>";
+
         function showAnswer() {
             var ele = document.getElementById("answer");
             ele.classList.remove("hidden");
             ele.style.display = "block";
         }
 
-        // function submitFeedback() {
-        //     document.getElementById("nextQuestion").submit();
-        // }
-
-        function myFunction() {
-            var x = document.getElementById("opt").selectedIndex;
-            var options = document.getElementsByTagName("option")[x].value;
-            var fileName = options.slice(0, -3);
-            // alert(url)
-            location.href = "http://localhost:4000/flash/" + fileName + "/submitFeedback";
+        function easy() {
+            var ele = document.getElementById("answer");
+            //ele.classList.remove("hidden");
+            console.log("hi this is keshav")
+                // var question = '<%=flashCard.quesion%>';
+            console.log(question);
+            // ele.style.display = "block";
         }
-        var listOfFiles = "<%=folderfiles%>"
-        console.log("files " + listOfFiles)
-        var splitArray = listOfFiles.split(",");
-        console.log("splitdata " + splitArray)
-        var filterMdFile = splitArray.filter(function(data) {
-            if (data.endsWith(".md")) {
-                return $('#opt').append('<option value = ' + data + '>' + data + '</option>"')
-            } else {
-                return "";
-            }
-        });
-        console.log("filterdata " + filterMdFile);
+
+        function submitFeedback() {
+            document.getElementById("nextQuestion").submit();
+        }
     </script>
 </body>
 

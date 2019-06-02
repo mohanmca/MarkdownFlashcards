@@ -49,7 +49,7 @@ function flashCardControllers(flashCardService, nav) {
         console.log('getQuestion ********************** Params ' + JSON.stringify(req.params, 2, null));
         let flashCard = getFlashCard(markDown);
         debug("flashCard!" + JSON.stringify(flashCard, null, 2));
-        res.render("showCard", {
+        res.render("showFlashCard", {
             nav,
             flashCard,
             title: "Select Answer"
@@ -62,7 +62,7 @@ function flashCardControllers(flashCardService, nav) {
         const { previousQuestions } = req.query;
         const flashCard = getFlashCard(markDown, previousQuestions);
         // debug("flashCard!" + JSON.stringify(flashCard, null, 2));
-        res.render("showCard", {
+        res.render("showFlashCard", {
             nav,
             flashCard,
             title: "Select Answer"
