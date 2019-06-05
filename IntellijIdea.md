@@ -1,4 +1,4 @@
-# Double Ctrl
+## Double Ctrl
 * Run Anything
 * Execute commands, such as opening a project, launching a run/debug configuration, running a command-line utility, and so on. The available commands depend on the set of plugins and tools you have configured for your project.
 ----
@@ -34,8 +34,7 @@
 * Add/remove line or block comment
 * Comment out a line or block of code.
 ----
-# Ctrl+Shift+F7
-	
+## Ctrl+Shift+F7
 * Highlight usages in a file
 * Highlight all occurrences of the selected fragment in the current file.
 ----
