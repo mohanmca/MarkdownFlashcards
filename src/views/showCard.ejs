@@ -17,7 +17,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.5/es5-shim.min.js"></script><script src="https://cdn.jsdelivr.net/lodash/2.4.1/lodash.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.5/es5-shim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/lodash/2.4.1/lodash.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.2.0/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/9.1.0/styles/github.min.css">
     <script src="js/markdown-it.js"></script>
@@ -37,6 +38,7 @@
 
     <style type="text/css">
         /* override bootstrap styles */
+        
         @import url('http://fonts.googleapis.com/css?family=Oswald:300,400:latin,latin-ext');
     </style>
 </head>
@@ -56,10 +58,11 @@
                 </button>
                 <a href="/" class="navbar-brand">Home</a>
                 <% for(let i=0; i<nav.length; i++) { %>
-                <a href="<%= nav[i].link%>" class="navbar-brand">
-                    <%= nav[i].title%></a>
-                <%}%>
-                </ul>
+                    <a href="<%= nav[i].link%>" class="navbar-brand">
+                        <%= nav[i].title%>
+                    </a>
+                    <%}%>
+                        </ul>
             </div>
             <nav class="collapse navbar-collapse" role="navigation">
             </nav>
@@ -69,21 +72,20 @@
     <div id="masthead">
         <div class="container">
             <div class="row">
-                <div class="col-md-7">
-                    <h1>
-                        <%= flashCard.quesion %>
-                        <p class="lead"></p>
-                    </h1>
+                <div id="question" class="col-md-7">
+
                 </div>
                 <div class="col-md-5">
                 </div>
             </div>
-        </div><!-- /cont -->
+        </div>
+        <!-- /cont -->
 
         <div class="container">
             <div class="row">
             </div>
-        </div><!-- /cont -->
+        </div>
+        <!-- /cont -->
 
     </div>
     <div class="container">
@@ -112,29 +114,34 @@
                                     </div>
                                     <div class="col-xs-3"></div>
                                 </div>
-                                <div class="row" id="showbutton">
-                                    <input type="button" onclick="showAnswer();"  value="Show Answer" />
-                                </div>
-                                <div class="row hidden" id="answer">
-                                    <div class="col-xs-9">
-                                        <h4><span class="label-default">
-                                                <%- flashCard.answer%></span></h4>
+                                <div id="showanswer">
+                                    <div class="row" id="showbutton">
+                                        <input type="button" onclick="showAnswer();" value="Show Answer" />
                                     </div>
-                                    <div class="col-xs-3"></div>
+                                    <div class="row hidden" id="answer">
+                                        <div class="col-xs-9">
+                                            <h4><span class="label-default">
+                                                <%- flashCard.answer%></span></h4>
+                                        </div>
+                                        <div class="col-xs-3"></div>
+                                    </div>
                                 </div>
                                 <br/>
                                 <br/>
                                 <div class="row" id="showbutton">
                                     <form method="GET" id="nextQuestion" name="nextQuestion" action="submitFeedback">
-                                        <input type="hidden" id="previousQuestions" name="previousQuestions" value=<%= flashCard.previousQuestions %> />
+                                        <input type="hidden" id="previousQuestions" name="previousQuestions" value=<%=flashCard.previousQuestions %> />
                                         <input type="submit" value="Next Question" />
-                                        <h4>Prior questions - <b><%- flashCard.previousQuestions ? flashCard.previousQuestions.split(",").length : "" %></b><%- flashCard.previousQuestions %></h4>
+                                        <h4>Prior questions - <b><%- flashCard.previousQuestions ? flashCard.previousQuestions.split(",").length : "" %></b>
+                                            <%- flashCard.previousQuestions %>
+                                        </h4>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        <a href="https://www.nerdishchaterwa.com/" class="btn btn-primary pull-right btnNext">More
-                            <i class="glyphicon glyphicon-chevron-right"></i></a>
+                        <a href="javascript:view()" id="view" class="btn btn-primary pull-right btnNext" style="margin:5px;">view</a>
+                        <a href="javascript:easy()" id="easy" class="btn btn-primary pull-right btnNext" style="margin:5px;">Easy</a>&nbsp;
+                        <a href="javascript:difficult()" id="difficult" class="btn btn-primary pull-right btnNext" style="margin:5px;">Difficult</a>&nbsp;
                     </div>
                 </div>
             </div>
@@ -180,7 +187,7 @@
 
                 </div>
                 <div class="col-sm-6">
-                    <p class="pull-right">Built with <i class="icon-heart-empty"></i> at <a href="http://www.nerdishchaterwa.com/">nerdishchaterwa</a></p>
+                    <!-- <p class="pull-right">Built with <i class="icon-heart-empty"></i> at <a href="http://www.nerdishchaterwa.com/">nerdishchaterwa</a></p> -->
                 </div>
             </div>
         </div>
@@ -189,21 +196,67 @@
     <!-- JavaScript jQuery code from nerdishchaterwa.com editor  -->
 
     <script type="text/javascript">
-        function showAnswer(){            
+        function showAnswer() {
             var ele = document.getElementById("answer");
             ele.classList.remove("hidden");
             ele.style.display = "block";
-	    }
-        function submitFeedback(){            
+        }
+
+        function submitFeedback() {
             document.getElementById("nextQuestion").submit();
-	    }
-</script>
- 
-        }        
+        }
+        var question = "<%=flashCard.que%>"
+
+        console.log(question);
+
+        // alert(question)
+        $("question").append('<h1>' + question + '<p class="lead"></p></h1>');
+
+        // Reading filename
+        var fileName = "<%=fileName%>"
+
+        function difficult() {
+            location.href = "/flash/question/" + question + "/" + fileName;
+        }
+
+        var fileContent = "<%=fileContent%>"
+        console.log(fileContent)
+        var splitdata = fileContent.split("&#34;");
+        console.log(splitdata)
+
+        //removing dupicates
+        var uniqvalues = splitdata.filter(function(elem, index, self) {
+            return index === self.indexOf(elem);
+        })
+
+        //remove empty values
+        var purifiedArray = uniqvalues.filter(function(entry) {
+            return entry.trim() != '';
+        });
+
+        for (var i = 0; i < purifiedArray.length; i++) {
+            checkingQuestions(purifiedArray[i]);
+        }
+
+        function checkingQuestions(index) {
+            if (question === index) {
+                document.getElementById("showanswer").style.visibility = "hidden";
+                document.getElementById("showanswer").style.display = "none";
+            }
+        }
+
+        function easy() {
+            document.getElementById("showanswer").style.visibility = "hidden";
+            document.getElementById("showanswer").style.display = "none";
+            //question
+            location.href = "/flash/file/" + question + "/" + fileName;
+        }
+
+        function view() {
+            document.getElementById("showanswer").style.visibility = "visible";
+            document.getElementById("showanswer").style.display = "block";
+        }
     </script>
-
-
-
 </body>
 
 </html>

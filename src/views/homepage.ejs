@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/9.1.0/styles/github.min.css">
     <script src="js/markdown-it.js"></script>
     <script src="https://twemoji.maxcdn.com/twemoji.min.js"></script>
+    <script src="../../public/scripts/homepage.js"></script>
     <link rel="stylesheet" href="css/index.css">
     <!-- <script src="/scripts/index.js"></script> -->
 
@@ -51,6 +52,14 @@
     <header class="navbar navbar-bright navbar-fixed-top" role="banner">
         <div class="container">
             <div class="navbar-header">
+
+                <div>
+                    <select name="files" id="opt" class="custom-select" onchange="myFunction()">
+                            <option value = "selectfile">select file</option> 
+                        </select>
+                </div>
+
+
                 <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -98,23 +107,19 @@
                                     <img alt="" src="" style="width:100px;height:100px" class="img-circle"></a>
                             </div>
                             <div class="col-md-10">
-                                <!-- <form action="/flash/submitFeedback"> -->
-                                <select name="files" id="opt">
+
+                                <!-- <select name="files" id="opt">
                                          
                                         </select> &nbsp;
-                                <!-- <input type="submit"> -->
-                                <!-- <input type="submit" value="submit"> -->
-                                <button id="submit" onclick="myFunction()">submit</button>
-                                <!-- </form> -->
+                                <button id="submit" onclick="myFunction()">submit</button> -->
+                                <h1>MARKDOWN FLASH CARD</h1>
+
                             </div>
                             <div class="col-md-10 col-sm-9">
                                 <div class="row">
                                     <div class="col-xs-9">
 
-                                        <!-- <h4><span class="label label-default">
-                                            <br/><br/><br/>
-                                            </span>
-                                        </h4> -->
+
                                     </div>
                                     <div class="col-xs-3">
 
@@ -186,7 +191,7 @@
 
                 </div>
                 <div class="col-sm-6">
-                    <p class="pull-right">Built with <i class="icon-heart-empty"></i> at <a href="http://www.nerdishchaterwa.com/">nerdishchaterwa</a></p>
+                    <!-- <p class="pull-right">Built with <i class="icon-heart-empty"></i> at <a href="http://www.nerdishchaterwa.com/">nerdishchaterwa</a></p> -->
                 </div>
             </div>
         </div>
@@ -201,16 +206,11 @@
             ele.style.display = "block";
         }
 
-        // function submitFeedback() {
-        //     document.getElementById("nextQuestion").submit();
-        // }
-
         function myFunction() {
             var x = document.getElementById("opt").selectedIndex;
             var options = document.getElementsByTagName("option")[x].value;
             var fileName = options.slice(0, -3);
-            // alert(url)
-            location.href = "http://localhost:4000/flash/" + fileName + "/submitFeedback";
+            location.href = "/flash/" + fileName + "/submitFeedback";
         }
         var listOfFiles = "<%=folderfiles%>"
         console.log("files " + listOfFiles)
@@ -218,7 +218,7 @@
         console.log("splitdata " + splitArray)
         var filterMdFile = splitArray.filter(function(data) {
             if (data.endsWith(".md")) {
-                return $('#opt').append('<option value = ' + data + '>' + data + '</option>"')
+                return $('#opt').append('<option value = ' + data + '>' + data + '</option>')
             } else {
                 return "";
             }
