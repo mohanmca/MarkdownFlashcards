@@ -2,7 +2,6 @@ const log = require("./debugger");
 const fs = require("fs");
 const qs = require("./mdQuestionService");
 const MarkdownIt = require("markdown-it");
-const ejsLint = require('ejs-lint');
 const md = new MarkdownIt();
 
 console.log("Current directory " + process.cwd());
