@@ -24,8 +24,8 @@ function router(nav) {
     flashCardRouter.route("/homepage").get(getFile);
     flashCardRouter.route("/:markDown/").get(submitFeedback);
     flashCardRouter.route("/:markDown/submitFeedback").all(submitFeedback);
-    flashCardRouter.route("/file/:question").get(fileWrite);
-    flashCardRouter.route("/question/:question").get(fileStringRemover);
+    flashCardRouter.route("/file/:question/:filename").get(fileWrite);
+    flashCardRouter.route("/question/:question/:filename").get(fileStringRemover);
     return flashCardRouter;
 }
 

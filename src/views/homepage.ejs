@@ -210,8 +210,6 @@
             var x = document.getElementById("opt").selectedIndex;
             var options = document.getElementsByTagName("option")[x].value;
             var fileName = options.slice(0, -3);
-
-            // location.href = "http://localhost:4000/flash/" + fileName + "/submitFeedback";
             location.href = "/flash/" + fileName + "/submitFeedback";
         }
         var listOfFiles = "<%=folderfiles%>"

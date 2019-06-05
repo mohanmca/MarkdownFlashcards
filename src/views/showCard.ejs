@@ -206,12 +206,17 @@
             document.getElementById("nextQuestion").submit();
         }
         var question = "<%=flashCard.que%>"
+
         console.log(question);
+
         // alert(question)
         $("question").append('<h1>' + question + '<p class="lead"></p></h1>');
 
+        // Reading filename
+        var fileName = "<%=fileName%>"
+
         function difficult() {
-            location.href = "/flash/question/" + question;
+            location.href = "/flash/question/" + question + "/" + fileName;
         }
 
         var fileContent = "<%=fileContent%>"
@@ -244,7 +249,7 @@
             document.getElementById("showanswer").style.visibility = "hidden";
             document.getElementById("showanswer").style.display = "none";
             //question
-            window.location.href = "/flash/file/" + question;
+            location.href = "/flash/file/" + question + "/" + fileName;
         }
 
         function view() {

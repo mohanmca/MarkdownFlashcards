@@ -60,31 +60,26 @@ function flashCardControllers(flashCardService, nav) {
     }
 
     function fileWrite(req, res) {
-        console.log("filewriting =================================> " + JSON.stringify(req.params))
+        console.log("Question Writing into a file =======================> " + JSON.stringify(req.params))
             // Data which will write in a file. 
-            //let data = "Learning how to write in a file."
         let data = JSON.stringify(req.params.question) + ",";
-
-        // Write data in 'Output.txt' . 
+        console.log(req.params.filename);
+        // Write data in 'questionlist.txt' . 
         fs.appendFileSync('./questionlist.txt', data, (err) => {
-
             // In case of a error throw err. 
             if (err) throw err;
         })
-        res.redirect('/flash/homepage');
-
+        res.redirect('/flash/' + req.params.filename + '/submitFeedback');
         res.end()
     }
 
     function fileStringRemover(req, res) {
         var data = fs.readFileSync('./questionlist.txt', 'utf-8');
-        //var str = "steps to configure project";
-        console.log("question to remove in file ======================>" + req.params.question)
-        var ip = JSON.stringify(req.params.question);
-        console.log("question to remove in file1 ======================>" + ip);
-        var newValue = data.replace(new RegExp(ip, 'g'), '');
-        fs.writeFileSync('./questionlist.txt', newValue, 'utf-8');
-        res.redirect('/flash/homepage');
+        console.log("Question removed from file ======================>" + req.params.question)
+        var removedQuestion = JSON.stringify(req.params.question);
+        var updatedFile = data.replace(new RegExp(removedQuestion, 'g'), '');
+        fs.writeFileSync('./questionlist.txt', updatedFile, 'utf-8');
+        res.redirect('/flash/' + req.params.filename + '/submitFeedback');
         res.end()
     }
 
@@ -93,12 +88,10 @@ function flashCardControllers(flashCardService, nav) {
             var questionlist = fs.readFileSync('./questionlist.txt', (err, data) => {
                 if (err) throw err;
                 console.log("file reading " + data);
-
             })
         } catch (err) {
             fs.createWriteStream('./questionlist.txt');
         }
-
         return questionlist;
     }
 
@@ -108,16 +101,16 @@ function flashCardControllers(flashCardService, nav) {
             res.redirect('/flash/homepage');
         }
         console.log('submitFeedback ********************** Params ' + JSON.stringify(req.params, 2, null));
+        var fileName = req.params.markDown;
         const { previousQuestions } = req.query;
         const flashCard = getFlashCard(markDown, previousQuestions);
         const questionList = fileReading();
-        // console.log("out side " + questionList.toString())
-        // debug("flashCard!" + JSON.stringify(flashCard, null, 2));
         res.render("showCard", {
             nav,
             flashCard,
             title: "Select Answer",
-            fileContent: questionList
+            fileContent: questionList,
+            fileName
         });
     }
 

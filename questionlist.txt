@@ -1,1 +1,1 @@
-,,,,"steps to configure project",,"How to negate predicate in Java-11",,"What are sequence of https protocol","Give an example for local variable type inference",,"Additional local-variable syntax for lambda parameters",
+"Additional local-variable syntax for lambda parameters",,"Additional local-variable syntax for lambda parameters",,,,,,,,,,"e","d","a","c","b",
