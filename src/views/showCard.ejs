@@ -139,7 +139,8 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="javascript:easy()" id="easy" class="btn btn-primary pull-right btnNext" style="margin:5px;">Easy</a>
+                        <a href="javascript:view()" id="view" class="btn btn-primary pull-right btnNext" style="margin:5px;">view</a>
+                        <a href="javascript:easy()" id="easy" class="btn btn-primary pull-right btnNext" style="margin:5px;">Easy</a>&nbsp;
                         <a href="javascript:difficult()" id="difficult" class="btn btn-primary pull-right btnNext" style="margin:5px;">Difficult</a>&nbsp;
                     </div>
                 </div>
@@ -209,6 +210,10 @@
         // alert(question)
         $("question").append('<h1>' + question + '<p class="lead"></p></h1>');
 
+        function difficult() {
+            location.href = "/flash/question/" + question;
+        }
+
         var fileContent = "<%=fileContent%>"
         console.log(fileContent)
         var splitdata = fileContent.split("&#34;");
@@ -242,7 +247,7 @@
             window.location.href = "/flash/file/" + question;
         }
 
-        function difficult() {
+        function view() {
             document.getElementById("showanswer").style.visibility = "visible";
             document.getElementById("showanswer").style.display = "block";
         }

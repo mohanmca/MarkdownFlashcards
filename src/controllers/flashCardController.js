@@ -76,6 +76,18 @@ function flashCardControllers(flashCardService, nav) {
         res.end()
     }
 
+    function fileStringRemover(req, res) {
+        var data = fs.readFileSync('./questionlist.txt', 'utf-8');
+        //var str = "steps to configure project";
+        console.log("question to remove in file ======================>" + req.params.question)
+        var ip = JSON.stringify(req.params.question);
+        console.log("question to remove in file1 ======================>" + ip);
+        var newValue = data.replace(new RegExp(ip, 'g'), '');
+        fs.writeFileSync('./questionlist.txt', newValue, 'utf-8');
+        res.redirect('/flash/homepage');
+        res.end()
+    }
+
     function fileReading() {
         try {
             var questionlist = fs.readFileSync('./questionlist.txt', (err, data) => {
@@ -109,6 +121,6 @@ function flashCardControllers(flashCardService, nav) {
         });
     }
 
-    return { getQuestion, submitFeedback, fileWrite };
+    return { getQuestion, submitFeedback, fileWrite, fileStringRemover };
 }
 module.exports = flashCardControllers;

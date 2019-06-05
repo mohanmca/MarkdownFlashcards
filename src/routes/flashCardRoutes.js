@@ -18,10 +18,14 @@ function router(nav) {
     const { fileWrite } = flashCardController(
         nav
     );
+    const { fileStringRemover } = flashCardController(
+        nav
+    );
     flashCardRouter.route("/homepage").get(getFile);
     flashCardRouter.route("/:markDown/").get(submitFeedback);
     flashCardRouter.route("/:markDown/submitFeedback").all(submitFeedback);
     flashCardRouter.route("/file/:question").get(fileWrite);
+    flashCardRouter.route("/question/:question").get(fileStringRemover);
     return flashCardRouter;
 }
 
