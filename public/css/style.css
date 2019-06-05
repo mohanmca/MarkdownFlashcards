@@ -1,4 +1,4 @@
-.navbar-form input, 
+.navbar-form input,
 .form-inline input {
     width: auto;
 }
@@ -19,14 +19,11 @@ h3,
 }
 
 footer {
-
     margin-top: 40px;
     padding-top: 40px;
     padding-bottom: 40px;
     background-color: #cecece;
-
 }
-
 
 #masthead {
     min-height: 199px;
@@ -199,3 +196,20 @@ a:hover {
     display: none;
     background-color: yellow;
 }
+
+
+/*the container must be positioned relative:*/
+
+.custom-select {
+    position: relative;
+    font-family: Arial;
+    font-size: 14px;
+}
+
+
+/* .custom-select select {
+    display: none;
+    /*hide original SELECT element:*/
+
+
+/* } */

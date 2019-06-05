@@ -14,10 +14,14 @@ function router(nav) {
     const { getFile } = filesController(
         nav
     );
+
+    const { fileWrite } = flashCardController(
+        nav
+    );
     flashCardRouter.route("/homepage").get(getFile);
     flashCardRouter.route("/:markDown/").get(submitFeedback);
     flashCardRouter.route("/:markDown/submitFeedback").all(submitFeedback);
-
+    flashCardRouter.route("/file/:question").get(fileWrite);
     return flashCardRouter;
 }
 

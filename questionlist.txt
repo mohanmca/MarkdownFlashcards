@@ -1,0 +1,1 @@
+"Give an example for local variable type inference","What are sequence of https protocol","Additional local-variable syntax for lambda parameters","How to negate predicate in Java-11","steps to configure project",
