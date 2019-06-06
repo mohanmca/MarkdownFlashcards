@@ -12,7 +12,7 @@ list.stream()
       .collect(Collectors.toList());
 ```
 ----
-## What are the changes to HTTP Client
+## What are the changes to HTTP Client?
 ```java
 // Additional package java.net.http
 java.net.http.HttpClient
@@ -30,7 +30,7 @@ lines.stream()
 
 ----
 
-## What are sequence of https protocol
+## What are sequence of https protocol?
 * Browser requests a secure page with https url
 * WebServer sends it's public-key with server certificate
 * Browser ensures the certifcate is valid
@@ -44,7 +44,7 @@ lines.stream()
 
 ----
 
-## How to configure passwordless ssh on the server 
+## How to configure passwordless ssh on the server? 
 
 
 1. Create keys on the client machine
