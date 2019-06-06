@@ -1,6 +1,7 @@
 const debug = require("debug")("app:flashCardControllers");
 const fs = require('fs')
-    //const { MongoClient, ObjectId } = require('mongodb');
+
+//const { MongoClient, ObjectId } = require('mongodb');
 
 function flashCardControllers(flashCardService, nav) {
     function getRandomExcluding(max, exclude) {
@@ -95,6 +96,13 @@ function flashCardControllers(flashCardService, nav) {
         return questionlist;
     }
 
+    function filesdata() {
+        var files = fs.readdirSync(process.cwd());
+        console.log("Current directory " + process.cwd())
+        console.log(files);
+        return files;
+    }
+
     function submitFeedback(req, res) {
         let { markDown } = {...req.params }
         if (!markDown) {
@@ -110,7 +118,8 @@ function flashCardControllers(flashCardService, nav) {
             flashCard,
             title: "Select Answer",
             fileContent: questionList,
-            fileName
+            fileName,
+            folderfiles: filesdata()
         });
     }
 
