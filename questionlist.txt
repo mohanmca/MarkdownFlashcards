@@ -1,1 +1,1 @@
-"Additional local-variable syntax for lambda parameters",,"Additional local-variable syntax for lambda parameters",,,,,,,,,,"e","d","a","c","b",
+,,,|,,,,,,,,,,,,,,,"Additional local-variable syntax for lambda parameters","How to negate predicate in Java-11",,"How to negate predicate in Java-11",,,,,,,,,,,,"Ctrl0x2BShift0x2BF7","Ctrl0x2BW0x2FCtrl0x2BShift0x2BW","Double Shift","Ctrl0x2BN0x2FCtrl0x2BShift0x2BN0x2FCtrl0x2BShift0x2BAlt0x2BN","Ctrl0x2BSpace","Ctrl0x2BE",,,"Alt0x2BEnter","Ctrl0x2BShift0x2BA",

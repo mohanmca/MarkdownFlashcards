@@ -50,6 +50,12 @@
     <header class="navbar navbar-bright navbar-fixed-top" role="banner">
         <div class="container">
             <div class="navbar-header">
+
+                <div>
+                    <select name="files" id="opt" class="custom-select" onchange="myFunction()">
+                                    <option value = "selectfile">select file</option> 
+                                </select>
+                </div>
                 <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -215,8 +221,30 @@
         // Reading filename
         var fileName = "<%=fileName%>"
 
+        // function use to select file
+        function myFunction() {
+            var x = document.getElementById("opt").selectedIndex;
+            var options = document.getElementsByTagName("option")[x].value;
+            var fileName = options.slice(0, -3);
+            location.href = "/flash/" + fileName + "/submitFeedback";
+        }
+        // collecting list of files
+        var listOfFiles = "<%=folderfiles%>"
+        console.log("files " + listOfFiles)
+        var splitArray = listOfFiles.split(",");
+        console.log("splitdata " + splitArray)
+        var filterMdFile = splitArray.filter(function(data) {
+            if (data.endsWith(".md")) {
+                return $('#opt').append('<option value = ' + data + '>' + data + '</option>')
+            } else {
+                return "";
+            }
+        });
+        console.log("filterdata " + filterMdFile);
+
+        //difficult button
         function difficult() {
-            location.href = "/flash/question/" + question + "/" + fileName;
+            location.href = "/flash/question/" + question.replace(/[/]/g, '0x2F').replace(/[?]/g, '0x3F').replace(/[+]/g, '0x2B').replace(/[|]/g, '0x7C') + "/" + fileName;
         }
 
         var fileContent = "<%=fileContent%>"
@@ -239,7 +267,7 @@
         }
 
         function checkingQuestions(index) {
-            if (question === index) {
+            if (question.replace(/[/]/g, '0x2F').replace(/[?]/g, '0x3F').replace(/[+]/g, '0x2B').replace(/[|]/g, '0x7C') === index) {
                 document.getElementById("showanswer").style.visibility = "hidden";
                 document.getElementById("showanswer").style.display = "none";
             }
@@ -249,7 +277,7 @@
             document.getElementById("showanswer").style.visibility = "hidden";
             document.getElementById("showanswer").style.display = "none";
             //question
-            location.href = "/flash/file/" + question + "/" + fileName;
+            location.href = "/flash/file/" + question.replace(/[/]/g, '0x2F').replace(/[?]/g, '0x3F').replace(/[+]/g, '0x2B').replace(/[|]/g, '0x7C') + "/" + fileName;
         }
 
         function view() {
