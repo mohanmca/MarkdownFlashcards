@@ -24,7 +24,7 @@
     "express-session": "1.15.6",
     "font-awesome": "4.7.0",
     "lodash": "4.17.15",
-    "markdown-it": "8.4.2",
+    "markdown-it": "12.3.2",
     "morgan": "1.9.1",
     "mysql": "^2.17.1",
     "nodemon": "1.18.9",
